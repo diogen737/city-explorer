@@ -1,4 +1,12 @@
-<div class="tw-container tw-mx-auto">
-  <h1>City List</h1>
+<div class="tw-container tw-mx-auto tw-py-10">
+  <h1 class="tw-text-2xl tw-font-bold tw-mb-10">City List</h1>
+
+  <button
+    class="tw-bg-blue-500 tw-text-white tw-px-4 tw-py-2 tw-rounded-md hover:tw-bg-blue-600 tw-transition-colors"
+    (click)="resetData()"
+  >
+    Reset Data
+  </button>
+
   <pre>{{ cities.value() | json }}</pre>
 </div>

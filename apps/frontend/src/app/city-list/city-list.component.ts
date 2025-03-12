@@ -1,6 +1,8 @@
 import { JsonPipe } from '@angular/common';
-import { httpResource } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { HttpClient, httpResource } from '@angular/common/http';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-city-list',
@@ -10,7 +12,20 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   imports: [JsonPipe],
 })
 export class CityListComponent {
-  public readonly cities = httpResource('/api', {
+  private readonly http = inject(HttpClient);
+  private readonly _destroyRef = inject(DestroyRef);
+
+  public readonly cities = httpResource('/api/cities', {
     defaultValue: [],
   });
+
+  resetData() {
+    this.http
+      .post('/api/data-reset', {})
+      .pipe(
+        tap(() => this.cities.reload()),
+        takeUntilDestroyed(this._destroyRef),
+      )
+      .subscribe();
+  }
 }

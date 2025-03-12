@@ -38,6 +38,12 @@
       "options": {
         "passWithNoTests": true
       }
+    },
+    "prisma": {
+      "command": "prisma",
+      "options": {
+        "cwd": "apps/api"
+      }
     }
   }
 }
