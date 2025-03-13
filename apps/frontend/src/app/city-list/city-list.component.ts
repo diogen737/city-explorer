@@ -1,27 +1,17 @@
-import { JsonPipe } from '@angular/common';
 import { HttpClient, httpResource } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import type { City, Prisma } from '@prisma/client';
 import { tap } from 'rxjs';
 
-// TODO: can be moved out to the library and combined with the service params used in the controller
-// see apps/api/src/app/app.controller.ts
-type CityPayload = Prisma.CityGetPayload<{
-  include: {
-    landmarks: true;
-    country: {
-      include: { continent: true };
-    };
-  };
-}>;
+import { CityPayload } from './model';
+import { CityCardComponent } from './city-card/city-card.component';
 
 @Component({
   selector: 'app-city-list',
   templateUrl: './city-list.component.html',
   styleUrl: './city-list.component.scss',
   // changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [],
+  imports: [CityCardComponent],
 })
 export class CityListComponent {
   private readonly http = inject(HttpClient);

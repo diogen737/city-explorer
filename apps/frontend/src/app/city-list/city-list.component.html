@@ -1,23 +1,18 @@
-<div class="tw-mx-auto tw-max-w-7xl tw-py-10">
-  <h1 class="tw-mb-10 tw-text-2xl tw-font-bold">City List</h1>
+<div class="tw-mx-auto tw-max-w-7xl tw-px-2 tw-py-10 md:tw-px-4">
+  <div class="tw-mb-10 tw-flex tw-items-center tw-justify-between">
+    <h1 class="tw-text-2xl tw-font-bold">City List</h1>
 
-  <div class="tw-mb-5 tw-flex tw-justify-end">
     <button
-      class="tw-rounded-md tw-bg-orange-500 tw-px-4 tw-py-2 tw-text-white tw-transition-colors hover:tw-bg-orange-600"
+      class="tw-rounded-md tw-bg-orange-500 tw-px-4 tw-py-2 tw-text-white hover:tw-bg-orange-600"
       (click)="resetData()"
     >
       Reset Data
     </button>
   </div>
 
-  <div class="tw-overflow-x-auto tw-rounded-md tw-border tw-border-gray-200 dark:tw-border-gray-700">
+  <div class="tw-grid tw-gap-4">
     @for (city of cities.value(); track city.id) {
-      <tr>
-        <td class="tw-p-2">{{ city.name }}</td>
-        <td class="tw-p-2">{{ city.country.name }}</td>
-        <td class="tw-p-2">{{ city.country.continent.name }}</td>
-        <td class="tw-p-2">{{ city.landmarks.length }}</td>
-      </tr>
+      <app-city-card [city]="city" />
     }
   </div>
 </div>
