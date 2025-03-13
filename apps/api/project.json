@@ -20,7 +20,7 @@
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
-      "dependsOn": ["build"],
+      "dependsOn": ["generate-types", "build"],
       "options": {
         "buildTarget": "api:build",
         "runBuildTargetDependencies": false
@@ -41,6 +41,24 @@
     },
     "prisma": {
       "command": "prisma",
+      "options": {
+        "cwd": "apps/api"
+      }
+    },
+    "generate-types": {
+      "command": "prisma generate",
+      "options": {
+        "cwd": "apps/api"
+      }
+    },
+    "migrate": {
+      "command": "prisma migrate dev",
+      "options": {
+        "cwd": "apps/api"
+      }
+    },
+    "data-studio": {
+      "command": "prisma studio",
       "options": {
         "cwd": "apps/api"
       }

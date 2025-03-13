@@ -10,17 +10,8 @@ export class CityService {
     return this.prisma.city.findUnique({ where: cityWhereUniqueInput });
   }
 
-  async cities(params: {
-    skip?: number;
-    take?: number;
-    cursor?: Prisma.CityWhereUniqueInput;
-    where?: Prisma.CityWhereInput;
-    orderBy?: Prisma.CityOrderByWithRelationInput;
-    include?: Prisma.CityInclude;
-    omit?: Prisma.CityOmit;
-  }): Promise<City[]> {
-    const { skip, take, cursor, where, orderBy, include, omit } = params;
-    return this.prisma.city.findMany({ skip, take, cursor, where, orderBy, include, omit });
+  async cities<T extends Prisma.CityFindManyArgs>(args: Prisma.SelectSubset<T, Prisma.CityFindManyArgs>) {
+    return this.prisma.city.findMany(args);
   }
 
   async createCity(data: Prisma.CityCreateInput): Promise<City> {

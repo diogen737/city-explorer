@@ -21,12 +21,15 @@ export class AppController {
           include: { continent: true },
         },
       },
+      // save a few bytes
       omit: {
         countryId: true,
       },
     });
   }
 
+  // Convenience endpoint to clear all data
+  // NOTE: This is not a good practice, but it's only for the demo purposes
   @Post('data-reset')
   @HttpCode(204)
   async createContinent() {
