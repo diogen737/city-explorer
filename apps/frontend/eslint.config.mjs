@@ -1,10 +1,12 @@
 import nx from '@nx/eslint-plugin';
 import baseConfig from '../../eslint.config.mjs';
+import tailwind from 'eslint-plugin-tailwindcss';
 
 export default [
   ...baseConfig,
   ...nx.configs['flat/angular'],
   ...nx.configs['flat/angular-template'],
+  ...tailwind.configs['flat/recommended'],
   {
     files: ['**/*.ts'],
     rules: {
