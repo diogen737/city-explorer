@@ -1,45 +1,64 @@
-<div
-  class="tw-grid tw-grid-cols-2 tw-gap-4 tw-rounded-md tw-bg-gray-200 tw-px-8 tw-py-4 lg:tw-grid-cols-12 lg:tw-py-6 lg:tw-pl-10 dark:tw-bg-gray-800"
->
-  <p
-    class="tw-col-span-full tw-text-center tw-text-2xl tw-font-medium tw-text-sky-600 lg:tw-col-span-3 lg:tw-text-start dark:tw-text-sky-300"
+<div class="">
+  <div
+    class="tw-grid tw-grid-cols-2 tw-gap-4 tw-rounded-md tw-bg-gray-200 tw-px-8 tw-py-4 tw-transition-[border-radius] lg:tw-grid-cols-12 lg:tw-py-6 lg:tw-pl-10 dark:tw-bg-gray-800"
+    [ngClass]="{ 'tw-rounded-b-none': state.state() === 'expanded' }"
   >
-    {{ city().name }}
-  </p>
+    <div class="tw-col-span-full tw-inline-flex tw-items-center tw-justify-center lg:tw-col-span-3 lg:tw-justify-start">
+      <p class="tw-text-2xl tw-font-medium tw-text-sky-600 dark:tw-text-sky-300">
+        {{ city().name }}
+      </p>
+    </div>
 
-  <div class="tw-flex tw-items-center tw-gap-2 lg:tw-col-span-2 xl:tw-text-lg">
-    <fa-icon [icon]="['fas', 'flag']" class="tw-min-w-6 tw-text-gray-400" />
-    <span class="tw-whitespace-nowrap tw-font-medium">{{ city().country.name }}</span>
+    <div class="tw-flex tw-items-center tw-gap-2 lg:tw-col-span-2 xl:tw-text-lg">
+      <fa-icon [icon]="['fas', 'flag']" class="tw-min-w-6 tw-text-gray-400" />
+      <div class="">
+        <p class="tw-whitespace-nowrap tw-font-medium">{{ city().country.name }}</p>
+        <p class="tw-text-sm tw-text-gray-400">Country</p>
+      </div>
+    </div>
+
+    <div class="tw-flex tw-items-center tw-gap-2 lg:tw-col-span-2 xl:tw-text-lg">
+      <fa-icon [icon]="['fas', 'globe']" class="tw-min-w-6 tw-text-gray-400" />
+      <div class="">
+        <p class="tw-whitespace-nowrap tw-font-medium">{{ city().country.continent.name }}</p>
+        <p class="tw-text-sm tw-text-gray-400">Continent</p>
+      </div>
+    </div>
+
+    <div class="tw-flex tw-items-center tw-gap-2 lg:tw-col-span-2 xl:tw-text-lg">
+      <fa-icon [icon]="['fas', 'building-flag']" class="tw-min-w-6 tw-text-gray-400" />
+      <div class="">
+        <p class="tw-whitespace-nowrap tw-font-medium">{{ city().founded }}</p>
+        <p class="tw-text-sm tw-text-gray-400">Founded</p>
+      </div>
+    </div>
+
+    <div class="tw-flex tw-items-center tw-gap-2 lg:tw-col-span-2 xl:tw-text-lg">
+      <fa-icon [icon]="['fas', 'users']" class="tw-min-w-6 tw-text-gray-400" />
+      <div class="">
+        <p class="tw-whitespace-nowrap tw-font-medium">{{ city().population | number }}</p>
+        <p class="tw-text-sm tw-text-gray-400">Population</p>
+      </div>
+    </div>
+
+    <div class="tw-col-span-full lg:tw-col-span-1 lg:tw-text-end">
+      @let _title = state.state() === 'expanded' ? 'Hide details' : 'Show details';
+      <button
+        class="tw-inline-flex tw-w-full tw-items-center tw-justify-center tw-gap-2 tw-rounded-md tw-bg-gray-300 tw-p-1 tw-text-lg tw-font-medium tw-text-gray-800 hover:tw-bg-gray-400 lg:tw-size-9 dark:tw-bg-gray-700 dark:tw-text-gray-200 dark:hover:tw-bg-gray-600"
+        [title]="_title"
+        (click)="state.toggle()"
+      >
+        <fa-icon
+          [icon]="['fas', 'chevron-down']"
+          class="tw-transition-transform"
+          [ngClass]="state.state() === 'expanded' ? 'tw-rotate-180' : ''"
+        />
+        <span class="tw-min-w-28 lg:tw-hidden">{{ _title }}</span>
+      </button>
+    </div>
   </div>
 
-  <div class="tw-flex tw-items-center tw-gap-2 lg:tw-col-span-2 xl:tw-text-lg">
-    <fa-icon [icon]="['fas', 'globe']" class="tw-min-w-6 tw-text-gray-400" />
-    <span class="tw-whitespace-nowrap tw-font-medium">{{ city().country.continent.name }}</span>
-  </div>
-
-  <div class="tw-flex tw-items-center tw-gap-2 lg:tw-col-span-2 xl:tw-text-lg">
-    <fa-icon [icon]="['fas', 'building-flag']" class="tw-min-w-6 tw-text-gray-400" />
-    <span class="tw-whitespace-nowrap tw-font-medium">{{ city().founded }}</span>
-  </div>
-
-  <div class="tw-flex tw-items-center tw-gap-2 lg:tw-col-span-2 xl:tw-text-lg">
-    <fa-icon [icon]="['fas', 'users']" class="tw-min-w-6 tw-text-gray-400" />
-    <span class="tw-whitespace-nowrap tw-font-medium">{{ city().population | number }}</span>
-  </div>
-
-  <div class="tw-col-span-full lg:tw-col-span-1 lg:tw-text-end">
-    @let _title = state.state() === 'expanded' ? 'Hide details' : 'Show details';
-    <button
-      class="tw-inline-flex tw-w-full tw-items-center tw-justify-center tw-gap-2 tw-rounded-md tw-bg-gray-300 tw-p-1 tw-text-lg tw-font-medium tw-text-gray-800 hover:tw-bg-gray-400 lg:tw-size-9 dark:tw-bg-gray-700 dark:tw-text-gray-200 dark:hover:tw-bg-gray-600"
-      [title]="_title"
-      (click)="state.toggle()"
-    >
-      <fa-icon
-        [icon]="['fas', 'chevron-down']"
-        class="tw-transition-transform"
-        [ngClass]="state.state() === 'expanded' ? 'tw-rotate-180' : ''"
-      />
-      <span class="lg:tw-hidden">{{ _title }}</span>
-    </button>
-  </div>
+  @if (state.state() === 'expanded') {
+    <app-city-card-details [city]="city()" class="tw-block tw-overflow-hidden" @collapse />
+  }
 </div>

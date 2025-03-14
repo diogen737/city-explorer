@@ -1,0 +1,34 @@
+<div
+  class="tw-grid tw-grid-cols-2 tw-gap-4 tw-rounded-b-md tw-border-t tw-bg-gray-200 tw-px-8 tw-py-4 lg:tw-grid-cols-12 lg:tw-py-6 lg:tw-pl-10 dark:tw-border-gray-600 dark:tw-bg-gray-800"
+>
+  <div class="tw-flex tw-items-center tw-gap-2 lg:tw-col-span-2 lg:tw-col-start-4 xl:tw-text-lg">
+    <fa-icon [icon]="['fas', 'people-roof']" class="tw-min-w-6 tw-text-gray-400" />
+    <div>
+      <p class="tw-whitespace-nowrap tw-font-medium">{{ city().name_native }}</p>
+      <p class="tw-text-sm tw-text-gray-400">Native name</p>
+    </div>
+  </div>
+
+  <div class="tw-flex tw-items-center tw-gap-2 lg:tw-col-span-2 xl:tw-text-lg">
+    <fa-icon [icon]="['fas', 'map-marker-alt']" class="tw-min-w-6 tw-text-gray-400" />
+    <a
+      class="tw-whitespace-nowrap tw-font-medium tw-underline tw-underline-offset-4 hover:tw-text-gray-500 dark:hover:tw-text-gray-400"
+      [href]="mapsLink()"
+      target="_blank"
+    >
+      See on map
+    </a>
+  </div>
+
+  <div class="tw-col-span-full lg:tw-col-span-4">
+    <p class="tw-mb-2 tw-flex tw-items-center tw-gap-2 tw-text-gray-400">
+      <fa-icon [icon]="['fas', 'landmark']" class="tw-min-w-6" />
+      <span class="tw-font-medium">Landmarks</span>
+    </p>
+    <ul class="tw-list-inside tw-list-[circle] tw-pl-8">
+      @for (landmark of city().landmarks; track landmark.id) {
+        <li class="">{{ landmark.name }}</li>
+      }
+    </ul>
+  </div>
+</div>
