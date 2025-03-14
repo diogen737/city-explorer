@@ -1,13 +1,18 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "../../dist/out-tsc",
     "module": "commonjs",
     "types": ["node"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "target": "es2021",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "paths": {
+      "@cities/*": ["src/app/cities/*"],
+      "@common/*": ["src/app/common/*"]
+    }
   },
   "include": ["src/**/*.ts"],
   "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"]

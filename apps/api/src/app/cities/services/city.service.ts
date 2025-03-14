@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from './prisma.service';
 import { City, Prisma } from '@prisma/client';
+import { createPaginator } from 'prisma-pagination';
+
+import { PrismaService } from '@common/services/prisma.service';
 
 @Injectable()
 export class CityService {
@@ -11,7 +13,13 @@ export class CityService {
   }
 
   async cities<T extends Prisma.CityFindManyArgs>(args: Prisma.SelectSubset<T, Prisma.CityFindManyArgs>) {
-    return this.prisma.city.findMany(args);
+    // NOTE: paginate function doesn't infer the return type from the args, like the findMany function does
+    // Possible solution: either improve generic type arguments for the `paginate` function,
+    //                    or use the `findMany` and implement the pagination logic manually
+    // return this.prisma.city.findMany(args);
+
+    const paginate = createPaginator({ perPage: args.take });
+    return paginate<City, Prisma.CityFindManyArgs>(this.prisma.city, args, { page: args.skip / args.take + 1 });
   }
 
   async createCity(data: Prisma.CityCreateInput): Promise<City> {

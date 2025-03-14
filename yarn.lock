@@ -2045,6 +2045,7 @@ __metadata:
     postcss: "npm:^8.5.3"
     prettier: "npm:^3.5.3"
     prisma: "npm:^6.5.0"
+    prisma-pagination: "npm:^0.2.3"
     reflect-metadata: "npm:^0.2.2"
     rxjs: "npm:~7.8.2"
     tailwindcss: "npm:^3.4.17"
@@ -13702,6 +13703,13 @@ __metadata:
     ansi-styles: "npm:^5.0.0"
     react-is: "npm:^18.0.0"
   checksum: 10c0/edc5ff89f51916f036c62ed433506b55446ff739358de77207e63e88a28ca2894caac6e73dcb68166a606e51c8087d32d400473e6a9fdd2dbe743f46c9c0276f
+  languageName: node
+  linkType: hard
+
+"prisma-pagination@npm:^0.2.3":
+  version: 0.2.3
+  resolution: "prisma-pagination@npm:0.2.3"
+  checksum: 10c0/6a5365d8f7f7cbb1753340a9585150c9490fe0c2f2d34e108508de9e5ae5817e0746bb54848cc43113bdfa4e9108186bd92f713ae3058d67ccde2eea5b038382
   languageName: node
   linkType: hard
 

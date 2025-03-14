@@ -1,14 +1,16 @@
 import { Module } from '@nestjs/common';
+
 import { AppController } from './app.controller';
-import { ContinentService } from './continent.service';
-import { CountryService } from './country.service';
-import { CityService } from './city.service';
-import { LandmarkService } from './landmark.service';
-import { PrismaService } from './prisma.service';
+import { PrismaService } from '@common/services/prisma.service';
+import { CityController } from '@cities/controllers/city.controller';
+import { ContinentService } from '@cities/services/continent.service';
+import { CountryService } from '@cities/services/country.service';
+import { CityService } from '@cities/services/city.service';
+import { LandmarkService } from '@cities/services/landmark.service';
 
 @Module({
   imports: [],
-  controllers: [AppController],
-  providers: [ContinentService, CountryService, CityService, LandmarkService, PrismaService],
+  controllers: [AppController, CityController],
+  providers: [PrismaService, ContinentService, CountryService, CityService, LandmarkService],
 })
 export class AppModule {}

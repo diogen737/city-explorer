@@ -11,8 +11,49 @@
   </div>
 
   <div class="tw-grid tw-gap-4">
-    @for (city of cities.value(); track city.id) {
-      <app-city-card [city]="city" />
-    }
+    <!-- Taking advantage of the fixed cards layout and pre-defined pagination limit - we can estimate the list height -->
+    <div class="tw-relative tw-flex tw-min-h-[620px] tw-flex-col tw-gap-4 lg:tw-min-h-72">
+      @for (city of cities(); track city.id) {
+        <app-city-card [city]="city" />
+      } @empty {
+        <div class="tw-flex tw-size-full tw-flex-col tw-items-center tw-justify-center tw-gap-4">
+          @if (error()) {
+            <fa-icon [icon]="['fas', 'exclamation-triangle']" [size]="'2x'" class="tw-text-red-500" />
+            <span class="tw-text-lg tw-font-medium tw-text-red-500">{{ error() }}</span>
+          } @else if (!loading()) {
+            <fa-icon [icon]="['fas', 'city']" [size]="'2x'" class="tw-text-gray-400" />
+            <span class="tw-text-lg tw-font-medium tw-text-gray-400">No cities found</span>
+          }
+        </div>
+      }
+
+      @if (loading()) {
+        <div class="tw-absolute tw-inset-0 tw-flex tw-items-center tw-justify-center tw-rounded-md tw-backdrop-blur">
+          <fa-icon [icon]="['fas', 'spinner']" [size]="'2x'" [animation]="'spin'" class="tw-text-orange-500" />
+        </div>
+      }
+    </div>
+
+    <div class="tw-flex tw-items-center tw-justify-end tw-gap-4">
+      @if (metaTotal() > 0) {
+        <button
+          class="tw-rounded-md tw-bg-orange-500 tw-px-4 tw-py-2 tw-text-white hover:tw-bg-orange-600"
+          title="Previous page"
+          [disabled]="!metaPrev()"
+          (click)="prevPage()"
+        >
+          <fa-icon [icon]="['fas', 'chevron-left']" />
+        </button>
+
+        <button
+          class="tw-rounded-md tw-bg-orange-500 tw-px-4 tw-py-2 tw-text-white hover:tw-bg-orange-600"
+          title="Next page"
+          [disabled]="!metaNext()"
+          (click)="nextPage()"
+        >
+          <fa-icon [icon]="['fas', 'chevron-right']" />
+        </button>
+      }
+    </div>
   </div>
 </div>

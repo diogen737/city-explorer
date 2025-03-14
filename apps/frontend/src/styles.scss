@@ -5,6 +5,6 @@
 @layer base {
   a,
   button {
-    @apply tw-transition-colors;
+    @apply tw-transition-colors disabled:tw-pointer-events-none disabled:tw-opacity-40;
   }
 }
