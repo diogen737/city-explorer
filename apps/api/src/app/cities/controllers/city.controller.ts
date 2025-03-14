@@ -17,13 +17,17 @@ export class CityController {
   async cities(
     @Query('page', new ParseIntPipe(), new DefaultValuePipe(1)) page: number,
     @Query('limit', new ParseIntPipe(), new DefaultValuePipe(10)) limit: number,
+    @Query('query') query: string,
   ) {
     // Emulate slow response
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 300));
 
     return this.cityService.cities({
       skip: (page - 1) * limit,
       take: limit,
+      where: {
+        OR: [{ name: { contains: query } }, { name_native: { contains: query } }],
+      },
       include: {
         landmarks: true,
         country: {

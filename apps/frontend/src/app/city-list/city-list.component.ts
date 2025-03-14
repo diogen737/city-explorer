@@ -1,18 +1,18 @@
 import { HttpClient } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { catchError, finalize, of, switchMap, tap } from 'rxjs';
+import { catchError, debounceTime, finalize, of, switchMap, tap } from 'rxjs';
 
 import { CityPayload, PaginatedOutputDto } from './model';
 import { CityCardComponent } from './city-card/city-card.component';
-
 @Component({
   selector: 'app-city-list',
   templateUrl: './city-list.component.html',
   styleUrl: './city-list.component.scss',
   // changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CityCardComponent, FaIconComponent],
+  imports: [CityCardComponent, FaIconComponent, FormsModule],
 })
 export class CityListComponent {
   private readonly http = inject(HttpClient);
@@ -22,24 +22,29 @@ export class CityListComponent {
   private readonly limit = signal(3);
   public readonly loading = signal(false);
   public readonly error = signal<string | null>(null);
+  public readonly query = signal('');
 
-  private readonly paginationParams = computed(() => ({ page: this.page(), limit: this.limit() }));
+  private readonly queryDebounced = toSignal(toObservable(this.query).pipe(debounceTime(300)), { initialValue: '' });
+
+  private readonly resourceParams = computed(() => ({
+    page: this.page(),
+    limit: this.limit(),
+    query: this.queryDebounced(),
+  }));
 
   private readonly citiesResource = toSignal(
-    toObservable(this.paginationParams).pipe(
+    toObservable(this.resourceParams).pipe(
       tap(() => this.beforeFetch()),
-      switchMap(({ page, limit }) =>
-        this.http.get<PaginatedOutputDto<CityPayload>>(`/api/cities/list`, { params: { page, limit } }),
-      ),
+      switchMap((params) => this.http.get<PaginatedOutputDto<CityPayload>>(`/api/cities/list`, { params })),
       catchError((error) => this.handleError(error)),
       tap(() => this.loading.set(false)),
     ),
   );
 
   public readonly cities = computed(() => this.citiesResource()?.data ?? []);
-  public readonly metaTotal = computed(() => this.citiesResource()?.meta.total ?? 0);
   public readonly metaPrev = computed(() => this.citiesResource()?.meta.prev ?? null);
   public readonly metaNext = computed(() => this.citiesResource()?.meta.next ?? null);
+  public readonly showPagination = computed(() => (this.citiesResource()?.meta.lastPage ?? 0) > 1);
 
   nextPage() {
     this.page.update((page) => page + 1);

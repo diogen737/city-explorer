@@ -10,9 +10,19 @@
     </button>
   </div>
 
+  <div class="tw-mb-5 tw-grid tw-gap-4 md:tw-grid-cols-12">
+    <div class="md:tw-col-span-4">
+      <input
+        [(ngModel)]="query"
+        placeholder="Search"
+        class="tw-w-full tw-rounded-md tw-border tw-border-gray-300 tw-p-2 focus-visible:tw-outline focus-visible:tw-outline-gray-400 dark:tw-border-gray-600 dark:tw-bg-gray-800 dark:tw-text-white"
+      />
+    </div>
+  </div>
+
   <div class="tw-grid tw-gap-4">
     <!-- Taking advantage of the fixed cards layout and pre-defined pagination limit - we can estimate the list height -->
-    <div class="tw-relative tw-flex tw-min-h-[620px] tw-flex-col tw-gap-4 lg:tw-min-h-72">
+    <div class="tw-relative tw-flex tw-min-h-[740px] tw-flex-col tw-gap-4 lg:tw-min-h-80">
       @for (city of cities(); track city.id) {
         <app-city-card [city]="city" />
       } @empty {
@@ -35,7 +45,7 @@
     </div>
 
     <div class="tw-flex tw-items-center tw-justify-end tw-gap-4">
-      @if (metaTotal() > 0) {
+      @if (showPagination()) {
         <button
           class="tw-rounded-md tw-bg-orange-500 tw-px-4 tw-py-2 tw-text-white hover:tw-bg-orange-600"
           title="Previous page"

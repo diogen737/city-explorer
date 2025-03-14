@@ -8,9 +8,8 @@ describe('ThemeSelectComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ThemeSelectComponent]
-    })
-    .compileComponents();
+      imports: [ThemeSelectComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ThemeSelectComponent);
     component = fixture.componentInstance;
