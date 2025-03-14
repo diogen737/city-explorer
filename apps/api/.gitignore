@@ -1,8 +1,6 @@
 node_modules
 # Keep environment variables out of version control
-# For the demo purposes we'll keep it in the repo
-# .env
+.env
 
 # SQLite database
-# For the demo purposes we'll keep it in the repo
-# dev.db
+dev.db
