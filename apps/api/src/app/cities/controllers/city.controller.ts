@@ -1,11 +1,20 @@
-import { Controller, Get, Post, HttpCode, Query, DefaultValuePipe, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  HttpCode,
+  Query,
+  DefaultValuePipe,
+  ParseIntPipe,
+  OnApplicationBootstrap,
+} from '@nestjs/common';
 import { ContinentService } from '@cities/services/continent.service';
 import { CountryService } from '@cities/services/country.service';
 import { CityService } from '@cities/services/city.service';
 import { LandmarkService } from '@cities/services/landmark.service';
 
 @Controller('cities')
-export class CityController {
+export class CityController implements OnApplicationBootstrap {
   constructor(
     private readonly continentService: ContinentService,
     private readonly countryService: CountryService,
@@ -41,12 +50,20 @@ export class CityController {
     });
   }
 
+  async onApplicationBootstrap() {
+    const count = await this.cityService.count();
+    if (count > 0) {
+      return;
+    }
+    await this.dataPopulate();
+  }
+
   // Convenience endpoints to clear and re-populate all data
   // NOTE: for the demo purposes only
 
   @Post('data-reset')
   @HttpCode(204)
-  async createContinent() {
+  async dataReset() {
     await this.landmarkService.clear();
     await this.cityService.clear();
     await this.countryService.clear();
@@ -55,7 +72,7 @@ export class CityController {
 
   @Post('data-populate')
   @HttpCode(204)
-  async createCity() {
+  async dataPopulate() {
     const data = await import('../../../assets/default-data.json');
     for (const city of data.cities) {
       const continentName = city.continent;
@@ -74,7 +91,7 @@ export class CityController {
       }
 
       const cityName = city.name;
-      const existingCity = await this.cityService.createCity({
+      const existingCity = await this.cityService.create({
         name: cityName,
         name_native: city.name_native,
         population: parseInt(city.population),

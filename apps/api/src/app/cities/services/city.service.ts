@@ -22,16 +22,15 @@ export class CityService {
     return paginate<City, Prisma.CityFindManyArgs>(this.prisma.city, args, { page: args.skip / args.take + 1 });
   }
 
-  async createCity(data: Prisma.CityCreateInput): Promise<City> {
+  public async count() {
+    return this.prisma.city.count();
+  }
+
+  async create(data: Prisma.CityCreateInput): Promise<City> {
     return this.prisma.city.create({ data });
   }
 
-  async updateCity(params: { where: Prisma.CityWhereUniqueInput; data: Prisma.CityUpdateInput }): Promise<City> {
-    const { where, data } = params;
-    return this.prisma.city.update({ data, where });
-  }
-
-  async deleteCity(where: Prisma.CityWhereUniqueInput): Promise<City> {
+  async delete(where: Prisma.CityWhereUniqueInput): Promise<City> {
     return this.prisma.city.delete({ where });
   }
 
