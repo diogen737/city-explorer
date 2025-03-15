@@ -4,9 +4,9 @@
 
     <button
       class="tw-rounded-md tw-bg-orange-500 tw-px-4 tw-py-2 tw-text-white hover:tw-bg-orange-600"
-      (click)="resetData()"
+      (click)="clearData()"
     >
-      Reset Data
+      Clear Data
     </button>
   </div>
 
@@ -14,8 +14,9 @@
     <div class="md:tw-col-span-4">
       <input
         [(ngModel)]="query"
+        [disabled]="disableFilters()"
         placeholder="Search"
-        class="tw-w-full tw-rounded-md tw-border tw-border-gray-300 tw-p-2 focus-visible:tw-outline focus-visible:tw-outline-gray-400 dark:tw-border-gray-600 dark:tw-bg-gray-800 dark:tw-text-white"
+        class="tw-w-full tw-rounded-md tw-border tw-border-gray-300 tw-p-2 focus-visible:tw-outline focus-visible:tw-outline-gray-400 disabled:tw-pointer-events-none disabled:tw-opacity-40 dark:tw-border-gray-600 dark:tw-bg-gray-800 dark:tw-text-white"
       />
     </div>
   </div>
@@ -27,17 +28,24 @@
         <app-city-card [city]="city" />
       } @empty {
         <div class="tw-flex tw-size-full tw-flex-col tw-items-center tw-justify-center tw-gap-4">
-          @if (error()) {
+          @if (citiesResource.error()) {
             <fa-icon [icon]="['fas', 'exclamation-triangle']" [size]="'2x'" class="tw-text-red-500" />
-            <span class="tw-text-lg tw-font-medium tw-text-red-500">{{ error() }}</span>
-          } @else if (!loading()) {
+            <span class="tw-text-lg tw-font-medium tw-text-red-500">{{ citiesResource.error() }}</span>
+          } @else if (!citiesResource.isLoading()) {
             <fa-icon [icon]="['fas', 'city']" [size]="'2x'" class="tw-text-gray-400" />
             <span class="tw-text-lg tw-font-medium tw-text-gray-400">No cities found</span>
+
+            <button
+              class="tw-min-w-44 tw-rounded-md tw-bg-orange-500 tw-px-4 tw-py-2 tw-text-white hover:tw-bg-orange-600"
+              (click)="populateData()"
+            >
+              Populate Data
+            </button>
           }
         </div>
       }
 
-      @if (loading()) {
+      @if (citiesResource.isLoading()) {
         <div class="tw-absolute tw-inset-0 tw-flex tw-items-center tw-justify-center tw-rounded-md tw-backdrop-blur">
           <fa-icon [icon]="['fas', 'spinner']" [size]="'2x'" [animation]="'spin'" class="tw-text-orange-500" />
         </div>

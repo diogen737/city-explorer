@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { DecimalPipe, NgClass } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 import { CityPayload } from '../model';
@@ -10,6 +10,7 @@ import { CityCardDetailsComponent } from '../city-card-details/city-card-details
 @Component({
   selector: 'app-city-card',
   templateUrl: './city-card.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgClass, DecimalPipe, FaIconComponent, CityCardDetailsComponent],
   animations: [
     trigger('collapse', [

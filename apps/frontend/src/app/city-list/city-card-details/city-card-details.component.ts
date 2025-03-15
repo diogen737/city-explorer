@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 import { CityPayload } from '../model';
@@ -6,6 +6,7 @@ import { CityPayload } from '../model';
 @Component({
   selector: 'app-city-card-details',
   templateUrl: './city-card-details.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [FaIconComponent],
 })
 export class CityCardDetailsComponent {
