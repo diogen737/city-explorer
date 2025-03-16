@@ -32,6 +32,23 @@ These targets are either [inferred automatically](https://nx.dev/concepts/inferr
 
 [More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
+## Running tests
+
+API E2E tests:
+
+```sh
+#
+yarn dev:api
+# In separate terminal
+yarn e2e:api
+```
+
+Frontend E2E tests:
+
+```sh
+yarn e2e:frontend # Playwright will take care of running or reusing dev server
+```
+
 ## Add new projects
 
 While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
