@@ -2034,6 +2034,7 @@ __metadata:
     "@nx/webpack": "npm:20.5.0"
     "@nx/workspace": "npm:20.5.0"
     "@playwright/test": "npm:^1.51.0"
+    "@primeng/themes": "npm:^19.0.9"
     "@prisma/client": "npm:6.5.0"
     "@schematics/angular": "npm:~19.2.0"
     "@swc-node/register": "npm:~1.10.9"
@@ -2056,11 +2057,13 @@ __metadata:
     nx: "npm:20.5.0"
     postcss: "npm:^8.5.3"
     prettier: "npm:^3.5.3"
+    primeng: "npm:^19.0.9"
     prisma: "npm:^6.5.0"
     prisma-pagination: "npm:^0.2.3"
     reflect-metadata: "npm:^0.2.2"
     rxjs: "npm:~7.8.2"
     tailwindcss: "npm:^3.4.17"
+    tailwindcss-primeui: "npm:^0.5.1"
     ts-jest: "npm:^29.2.6"
     ts-node: "npm:10.9.2"
     tslib: "npm:^2.8.1"
@@ -4713,6 +4716,31 @@ __metadata:
   bin:
     playwright: cli.js
   checksum: 10c0/ae83dd2c3a32133de58f44a9dbcd73a8059155ebd8acc736ba8bd0a7ca99b194afe2e8f5a500861d18b1c8f06b4e4ea8de4a2402297c59053d4becc404b47e0a
+  languageName: node
+  linkType: hard
+
+"@primeng/themes@npm:^19.0.9":
+  version: 19.0.9
+  resolution: "@primeng/themes@npm:19.0.9"
+  dependencies:
+    "@primeuix/styled": "npm:^0.3.2"
+  checksum: 10c0/acfd22c4cf2cbf7d94bb20e4761aad4b42ebd2e978e60c0518b3174d360c341769eb6129b8941acbada54daafa745940d0439269783cca912454e94f8be5768d
+  languageName: node
+  linkType: hard
+
+"@primeuix/styled@npm:^0.3.2":
+  version: 0.3.2
+  resolution: "@primeuix/styled@npm:0.3.2"
+  dependencies:
+    "@primeuix/utils": "npm:^0.3.2"
+  checksum: 10c0/e97b85095847084844e28fbb252cbfb2090be47fed88e36cd86e886cdf9bd88f1dafa60d407123eaa6503702158347e96c8199e1e38bcbf4f5d65eda5767f261
+  languageName: node
+  linkType: hard
+
+"@primeuix/utils@npm:^0.3.2":
+  version: 0.3.2
+  resolution: "@primeuix/utils@npm:0.3.2"
+  checksum: 10c0/3ada284a982519c4e3cae9ed83e17dbae9d6e505a16b699fa37d69ca14e46350076389f70ef3a5b1a359ba6a0891299a20ec4f9a6ed330ab3bbda7d227e9b84f
   languageName: node
   linkType: hard
 
@@ -13718,6 +13746,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"primeng@npm:^19.0.9":
+  version: 19.0.9
+  resolution: "primeng@npm:19.0.9"
+  dependencies:
+    "@primeuix/styled": "npm:^0.3.2"
+    "@primeuix/utils": "npm:^0.3.2"
+    tslib: "npm:^2.3.0"
+  peerDependencies:
+    "@angular/animations": ^19.0.0
+    "@angular/cdk": ^19.0.0
+    "@angular/common": ^19.0.0
+    "@angular/core": ^19.0.0
+    "@angular/forms": ^19.0.0
+    "@angular/platform-browser": ^19.0.0
+    "@angular/router": ^19.0.0
+    rxjs: ^6.0.0 || ^7.8.1
+  checksum: 10c0/fe4673bee7c7211db141215a7fc2df0f92532436053c8f028cb139e89e9e8c472127a10a43dd88a549ca95b08293dafa4cea4a288e3cfdbc2318fd6bd2bcf8b3
+  languageName: node
+  linkType: hard
+
 "prisma-pagination@npm:^0.2.3":
   version: 0.2.3
   resolution: "prisma-pagination@npm:0.2.3"
@@ -15585,6 +15633,15 @@ __metadata:
   version: 1.1.3
   resolution: "sync-message-port@npm:1.1.3"
   checksum: 10c0/d259b08ab6da284135ba45bc13724268688b469371259f5978b2905e2c79342032b9240093b2483e83cfeccfd3a5e8300978e67090385f9b6b38941fcce1aec4
+  languageName: node
+  linkType: hard
+
+"tailwindcss-primeui@npm:^0.5.1":
+  version: 0.5.1
+  resolution: "tailwindcss-primeui@npm:0.5.1"
+  peerDependencies:
+    tailwindcss: ">=3.1.0"
+  checksum: 10c0/1931d1943a41e872e1f5565e3b78ac055b928360d7d83b4ea6c28839c22757552d228acd05c5f89ed83c83be853ac3f326558d16a9772ff4dc695727ae398d35
   languageName: node
   linkType: hard
 

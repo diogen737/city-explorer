@@ -12,6 +12,7 @@ import { ContinentService } from '@cities/services/continent.service';
 import { CountryService } from '@cities/services/country.service';
 import { CityService } from '@cities/services/city.service';
 import { LandmarkService } from '@cities/services/landmark.service';
+import { SortingParam, SortingParams } from '@common/decorators/sorting-params.decorator';
 
 @Controller('cities')
 export class CityController implements OnApplicationBootstrap {
@@ -26,6 +27,7 @@ export class CityController implements OnApplicationBootstrap {
   async cities(
     @Query('page', new ParseIntPipe(), new DefaultValuePipe(1)) page: number,
     @Query('limit', new ParseIntPipe(), new DefaultValuePipe(10)) limit: number,
+    @SortingParams(['name', 'population']) sort: SortingParam | null,
     @Query('query') query: string,
   ) {
     // Emulate slow response
@@ -34,6 +36,7 @@ export class CityController implements OnApplicationBootstrap {
     return this.cityService.cities({
       skip: (page - 1) * limit,
       take: limit,
+      orderBy: sort ? { [sort.property]: sort.direction } : { name: 'asc' },
       where: {
         OR: [{ name: { contains: query } }, { name_native: { contains: query } }],
       },

@@ -1,7 +1,9 @@
 import { ApplicationConfig, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { providePrimeNG } from 'primeng/config';
 import { provideHttpClient } from '@angular/common/http';
+import Aura from '@primeng/themes/aura';
 
 import { appRoutes } from './app.routes';
 
@@ -10,6 +12,19 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideExperimentalZonelessChangeDetection(),
     provideRouter(appRoutes),
-    provideAnimations(),
+    provideAnimationsAsync(),
+    providePrimeNG({
+      theme: {
+        preset: Aura,
+
+        options: {
+          darkModeSelector: '.tw-dark',
+          //   cssLayer: {
+          //     name: 'primeng',
+          //     order: 'tailwind-base, primeng, tailwind-utilities',
+          //   },
+        },
+      },
+    }),
   ],
 };

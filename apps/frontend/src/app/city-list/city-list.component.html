@@ -16,8 +16,38 @@
         [(ngModel)]="query"
         [disabled]="disableFilters()"
         placeholder="Search"
-        class="tw-w-full tw-rounded-md tw-border tw-border-gray-300 tw-p-2 focus-visible:tw-outline focus-visible:tw-outline-gray-400 disabled:tw-pointer-events-none disabled:tw-opacity-40 dark:tw-border-gray-600 dark:tw-bg-gray-800 dark:tw-text-white"
+        class="tw-w-full tw-rounded-md tw-border tw-border-gray-300 tw-p-2 focus-visible:tw-outline focus-visible:tw-outline-gray-400 disabled:tw-pointer-events-none disabled:tw-opacity-40 dark:tw-border-gray-600 dark:tw-bg-gray-800 dark:tw-text-gray-50"
       />
+    </div>
+
+    <div class="md:tw-col-span-2 md:tw-col-start-11">
+      <p-select
+        [options]="SORT_OPTIONS"
+        [(ngModel)]="sortOption"
+        [disabled]="disableFilters()"
+        [optionLabel]="'name'"
+        [optionValue]="'value'"
+        [variant]="'filled'"
+        placeholder="Select a City"
+        [styleClass]="disableFilters() ? ' tw-opacity-40' : ''"
+        class="tw-w-full"
+      >
+        <ng-template #selectedItem let-selectedOption>
+          @if (selectedOption) {
+            <div class="tw-flex tw-items-center tw-gap-2">
+              <fa-icon [icon]="selectedOption.icon" />
+              <div>{{ selectedOption.name }}</div>
+            </div>
+          }
+        </ng-template>
+
+        <ng-template #item let-option>
+          <div class="tw-flex tw-items-center tw-gap-2">
+            <fa-icon [icon]="option.icon" />
+            <div>{{ option.name }}</div>
+          </div>
+        </ng-template>
+      </p-select>
     </div>
   </div>
 
@@ -28,10 +58,10 @@
         <app-city-card [city]="city" />
       } @empty {
         <div class="tw-flex tw-size-full tw-flex-col tw-items-center tw-justify-center tw-gap-4">
-          @if (citiesResource.error()) {
+          @if (error()) {
             <fa-icon [icon]="['fas', 'exclamation-triangle']" [size]="'2x'" class="tw-text-red-500" />
-            <span class="tw-text-lg tw-font-medium tw-text-red-500">{{ citiesResource.error() }}</span>
-          } @else if (!citiesResource.isLoading()) {
+            <span class="tw-text-lg tw-font-medium tw-text-red-500">Something went wrong</span>
+          } @else if (!loading()) {
             <fa-icon [icon]="['fas', 'city']" [size]="'2x'" class="tw-text-gray-400" />
             <span class="tw-text-lg tw-font-medium tw-text-gray-400">No cities found</span>
 
@@ -45,7 +75,7 @@
         </div>
       }
 
-      @if (citiesResource.isLoading()) {
+      @if (loading()) {
         <div class="tw-absolute tw-inset-0 tw-flex tw-items-center tw-justify-center tw-rounded-md tw-backdrop-blur">
           <fa-icon [icon]="['fas', 'spinner']" [size]="'2x'" [animation]="'spin'" class="tw-text-orange-500" />
         </div>
