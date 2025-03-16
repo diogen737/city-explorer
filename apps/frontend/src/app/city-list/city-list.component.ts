@@ -18,10 +18,10 @@ import { CityCardComponent } from './city-card/city-card.component';
 })
 export class CityListComponent {
   public readonly SORT_OPTIONS = [
-    { name: 'Name', icon: ['fas', 'sort-alpha-down'], value: 'name:asc' },
-    { name: 'Name (Desc)', icon: ['fas', 'sort-alpha-down-alt'], value: 'name:desc' },
-    { name: 'Population', icon: ['fas', 'sort-numeric-down'], value: 'population:asc' },
-    { name: 'Population (Desc)', icon: ['fas', 'sort-numeric-down-alt'], value: 'population:desc' },
+    { name: 'Name A-Z', icon: ['fas', 'arrow-down-short-wide'], value: 'name:asc' },
+    { name: 'Name Z-A', icon: ['fas', 'arrow-down-wide-short'], value: 'name:desc' },
+    { name: 'Population: High-Low', icon: ['fas', 'arrow-down-short-wide'], value: 'population:asc' },
+    { name: 'Population: Low-High', icon: ['fas', 'arrow-down-wide-short'], value: 'population:desc' },
   ];
 
   private readonly page = signal(1);
