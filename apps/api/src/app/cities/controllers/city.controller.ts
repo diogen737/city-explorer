@@ -25,10 +25,10 @@ export class CityController implements OnApplicationBootstrap {
 
   @Get('list')
   async cities(
-    @Query('page', new ParseIntPipe(), new DefaultValuePipe(1)) page: number,
-    @Query('limit', new ParseIntPipe(), new DefaultValuePipe(10)) limit: number,
+    @Query('page', new ParseIntPipe({ optional: true }), new DefaultValuePipe(1)) page: number,
+    @Query('limit', new ParseIntPipe({ optional: true }), new DefaultValuePipe(10)) limit: number,
     @SortingParams(['name', 'population']) sort: SortingParam | null,
-    @Query('query') query: string,
+    @Query('query', new DefaultValuePipe('')) query: string,
   ) {
     // Emulate slow response
     await new Promise((resolve) => setTimeout(resolve, 300));

@@ -12,7 +12,8 @@
     "prisma": "nx prisma api",
     "migrate": "nx migrate api",
     "data-inspect": "nx data-studio api",
-    "e2e:api": "nx e2e api-e2e",
+    "e2e:api": "nx e2e api-e2e --watch",
+    "e2e:api:ci": "nx e2e api-e2e",
     "e2e:frontend:ci": "nx e2e frontend-e2e",
     "e2e:frontend": "nx e2e frontend-e2e --ui",
     "lint": "nx lint"
