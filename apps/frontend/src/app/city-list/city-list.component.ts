@@ -1,6 +1,6 @@
 import { httpResource } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { ChangeDetectionStrategy, Component, computed, resource, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, resource, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { SelectModule } from 'primeng/select';
@@ -70,6 +70,16 @@ export class CityListComponent {
   public readonly error = computed(
     () => this.citiesResource.error() || this.resetResource.error() || this.populateResource.error(),
   );
+
+  constructor() {
+    // Refetch data when reset or populate is done
+    effect(() => {
+      const needToFetch = !this.resetResource.isLoading() && !this.populateResource.isLoading();
+      if (needToFetch) {
+        this.citiesResource.reload();
+      }
+    });
+  }
 
   nextPage() {
     this.page.update((page) => page + 1);
