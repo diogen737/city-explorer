@@ -20,8 +20,8 @@ export class CityListComponent {
   public readonly SORT_OPTIONS = [
     { name: 'Name A-Z', icon: ['fas', 'arrow-down-short-wide'], value: 'name:asc' },
     { name: 'Name Z-A', icon: ['fas', 'arrow-down-wide-short'], value: 'name:desc' },
-    { name: 'Population: High-Low', icon: ['fas', 'arrow-down-short-wide'], value: 'population:asc' },
-    { name: 'Population: Low-High', icon: ['fas', 'arrow-down-wide-short'], value: 'population:desc' },
+    { name: 'Population: Low-High', icon: ['fas', 'arrow-down-short-wide'], value: 'population:asc' },
+    { name: 'Population: High-Low', icon: ['fas', 'arrow-down-wide-short'], value: 'population:desc' },
   ];
 
   private readonly page = signal(1);
