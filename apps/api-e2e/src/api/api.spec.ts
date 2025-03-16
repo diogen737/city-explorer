@@ -72,7 +72,12 @@ describe('CityController E2E Tests', () => {
     });
 
     it('should sort cities by specified parameters', async () => {
-      // Sort by population in descending order
+      try {
+        await axios.get('/api/cities/list?sort=abracadabra');
+      } catch (error) {
+        expect(error.response.status).toBe(406);
+      }
+
       const res = await axios.get('/api/cities/list?sort=population:desc');
       expect(res.status).toBe(200);
 
