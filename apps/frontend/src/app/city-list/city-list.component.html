@@ -13,6 +13,8 @@
   <div class="tw-mb-5 tw-grid tw-gap-4 md:tw-grid-cols-12">
     <div class="md:tw-col-span-4">
       <input
+        type="text"
+        role="searchbox"
         [(ngModel)]="query"
         [disabled]="disableFilters()"
         placeholder="Search"
@@ -31,6 +33,7 @@
         placeholder="Select a City"
         [styleClass]="disableFilters() ? ' tw-opacity-40' : ''"
         class="tw-w-full"
+        data-testid="sort-select"
       >
         <ng-template #selectedItem let-selectedOption>
           @if (selectedOption) {
@@ -77,7 +80,13 @@
 
       @if (loading()) {
         <div class="tw-absolute tw-inset-0 tw-flex tw-items-center tw-justify-center tw-rounded-md tw-backdrop-blur">
-          <fa-icon [icon]="['fas', 'spinner']" [size]="'2x'" [animation]="'spin'" class="tw-text-orange-500" />
+          <fa-icon
+            [icon]="['fas', 'spinner']"
+            [size]="'2x'"
+            [animation]="'spin'"
+            class="tw-text-orange-500"
+            data-testid="spinner"
+          />
         </div>
       }
     </div>
